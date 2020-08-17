@@ -7,62 +7,66 @@ new Vue({
     },
     methods: {
         atacar: function() {
-            this.jugador = this.jugador -10
-            this.monstruo = this.monstruo -10
+            this.jugador -= this.randomInt(1,10);
+            this.monstruo -= this.randomInt(1,10);
 
-            if(this.jugador==0){
+            if(this.jugador <= 0){
                 alert("Perdiste")
-                this.enJuego = false
-                this.monstruo = 100
-                this.jugador = 100
+                this.finalizarJuego();
             }
 
-            if(this.monstruo == 0) {
+            if(this.monstruo <= 0) {
                 alert('Ganaste')
-                this.enJuego = false
-                this.monstruo = 100
-                this.jugador = 100
+                this.finalizarJuego();
             }
         },
         curar: function() {
-            this.jugador = this.jugador + 10
-            this.monstruo = this.monstruo + 10
+            this.jugador += this.randomInt(1,10);
+    
             if(this.jugador>100){
                 this.jugador=100
             }
 
-            if(this.monstruo>100){
-                this.monstruo=100
-            }
+            this.jugador -= this.randomInt(1,5);
         },
         rendirse: function() {
-            this.jugador = 0
             alert('Te rendiste')
-            this.enJuego = false
-            this.jugador = 100
+            this.finalizarJuego();
                         
         },
         ataqueEspecial: function(){
-            this.jugador= this.jugador-20
-            this.monstruo= this.monstruo-20
+            this.jugador -= this.randomInt(10,20);
+            this.monstruo -= this.randomInt(10,20);
             
-            if(this.jugador==0){
+            if(this.jugador <= 0){
                 alert("Perdiste")
-                this.enJuego = false
-                this.monstruo = 100
-                this.jugador = 100
+                this.finalizarJuego();
             }
 
-            if(this.monstruo == 0) {
+            if(this.monstruo <= 0) {
                 alert('Ganaste')
-                this.enJuego = false
-                this.monstruo = 100
-                this.jugador = 100
+                this.finalizarJuego();
             } 
         },
         iniciarJuego : function(){
-        this.enJuego = true
-    }
+            this.enJuego = true
+        },
+        finalizarJuego: function() {
+            this.monstruo = 100
+            this.jugador = 100
+
+            let volverAJugar = confirm("Quiere volver a jugar?");
+
+            if(volverAJugar) {
+                this.iniciarJuego();
+            } else {
+                this.enJuego = false
+            }
+
+        },
+        randomInt: function(min, max) {
+            return min + Math.floor((max - min) * Math.random());
+        }
     }
 }
 )
