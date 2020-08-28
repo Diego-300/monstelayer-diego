@@ -45,11 +45,11 @@
             <button id="give-up">RENDIRSE</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="enJuego">
         <div class="small-12 columns">
             <ul>
-                <li>
-                	<div></div>
+                <li v-for="log in logs">
+                	<div> {{ log }} </div>
                 </li>
             </ul>
         </div>

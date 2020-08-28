@@ -1,14 +1,21 @@
 new Vue({
     el:'#app',
     data: {
+        logs:[], 
         jugador: 100,
         monstruo: 100,
         enJuego: false
     },
     methods: {
         atacar: function() {
-            this.jugador -= this.randomInt(1,10);
-            this.monstruo -= this.randomInt(1,10);
+            var danioJugador=this.randomInt(1,10);
+            var danioMonstruo=this.randomInt(1,10);
+
+            this.jugador -= danioJugador;
+            this.monstruo -= danioMonstruo;
+            this.logs.push("Monstruo ataca a Jugador con:"+danioJugador);
+            this.logs.push("Jugador ataca a Monstruo con:"+danioMonstruo);
+            
 
             if(this.jugador <= 0){
                 alert("Perdiste")
