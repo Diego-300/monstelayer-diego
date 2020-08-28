@@ -49,7 +49,7 @@
         <div class="small-12 columns">
             <ul>
                 <li v-for="log in logs">
-                	<div> {{ log }} </div>
+                	<div :class="{'player-turn':log.esJugador, 'monster-turn':!log.esJugador}"> {{ log.descripcion }} </div>
                 </li>
             </ul>
         </div>

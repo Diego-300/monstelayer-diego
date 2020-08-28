@@ -13,8 +13,14 @@ new Vue({
 
             this.jugador -= danioJugador;
             this.monstruo -= danioMonstruo;
-            this.logs.push("Monstruo ataca a Jugador con:"+danioJugador);
-            this.logs.push("Jugador ataca a Monstruo con:"+danioMonstruo);
+            this.logs.unshift({
+                esJugador:false,
+                descripcion: "Monstruo ataca a Jugador con:"+danioJugador
+            });
+            this.logs.unshift({
+                esJugador:true,
+                descripcion:"Jugador ataca a Monstruo con:"+danioMonstruo
+            });
             
 
             if(this.jugador <= 0){
@@ -57,6 +63,7 @@ new Vue({
         },
         iniciarJuego : function(){
             this.enJuego = true
+            this.logs=[]
         },
         finalizarJuego: function() {
             this.monstruo = 100
@@ -69,6 +76,7 @@ new Vue({
             } else {
                 this.enJuego = false
             }
+
 
         },
         randomInt: function(min, max) {
