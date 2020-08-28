@@ -34,22 +34,22 @@
     </section>
     <section class="row controls" v-if="!enJuego">
         <div class="small-12 columns">
-            <button id="start-game" @click='iniciarJuego' >INICIAR NUEVO JUEGO</button>
+            <button id="start-game" @click='iniciarJuego'>INICIAR NUEVO JUEGO</button>
         </div>
     </section>
     <section class="row controls" v-if="enJuego">
         <div class="small-12 columns">
             <button @click='atacar' id="attack">ATACAR</button>
-            <button @click='ataqueEspecial' id="special-attack">ATAQUE ESPECIAL</button>
+            <button id="special-attack">ATAQUE ESPECIAL</button>
             <button @click='curar' id="heal">CURAR</button>
-            <button @click="rendirse" id="give-up">RENDIRSE</button>
+            <button id="give-up">RENDIRSE</button>
         </div>
     </section>
-    <section class="row log">
+    <section class="row log" v-if="enJuego">
         <div class="small-12 columns">
             <ul>
-                <li>
-                	<div></div>
+                <li v-for="log in logs">
+                	<div :class="{'player-turn':log.esJugador, 'monster-turn':!log.esJugador}"> {{ log.descripcion }} </div>
                 </li>
             </ul>
         </div>

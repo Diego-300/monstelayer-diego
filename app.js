@@ -1,14 +1,27 @@
 new Vue({
     el:'#app',
     data: {
+        logs:[], 
         jugador: 100,
         monstruo: 100,
         enJuego: false
     },
     methods: {
         atacar: function() {
-            this.jugador -= this.randomInt(1,10);
-            this.monstruo -= this.randomInt(1,10);
+            var danioJugador=this.randomInt(1,10);
+            var danioMonstruo=this.randomInt(1,10);
+
+            this.jugador -= danioJugador;
+            this.monstruo -= danioMonstruo;
+            this.logs.unshift({
+                esJugador:false,
+                descripcion: "Monstruo ataca a Jugador con:"+danioJugador
+            });
+            this.logs.unshift({
+                esJugador:true,
+                descripcion:"Jugador ataca a Monstruo con:"+danioMonstruo
+            });
+            
 
             if(this.jugador <= 0){
                 alert("Perdiste")
@@ -27,7 +40,7 @@ new Vue({
                 this.jugador=100
             }
 
-            this.jugador -= this.randomInt(1,5);
+            this.jugador -= this.randomInt(1,10);
         },
         rendirse: function() {
             alert('Te rendiste')
@@ -50,18 +63,20 @@ new Vue({
         },
         iniciarJuego : function(){
             this.enJuego = true
+            this.logs=[]
         },
         finalizarJuego: function() {
             this.monstruo = 100
             this.jugador = 100
 
-            let volverAJugar = confirm("Quiere volver a jugar?");
+            let volverAJugar = confirm("Vas a volver a jugar?");
 
             if(volverAJugar) {
                 this.iniciarJuego();
             } else {
                 this.enJuego = false
             }
+
 
         },
         randomInt: function(min, max) {
