@@ -27,7 +27,7 @@ new Vue({
                 this.jugador=100
             }
 
-            this.jugador -= this.randomInt(1,5);
+            this.jugador -= this.randomInt(1,10);
         },
         rendirse: function() {
             alert('Te rendiste')
@@ -55,7 +55,7 @@ new Vue({
             this.monstruo = 100
             this.jugador = 100
 
-            let volverAJugar = confirm("Quiere volver a jugar?");
+            let volverAJugar = confirm("Vas a volver a jugar?");
 
             if(volverAJugar) {
                 this.iniciarJuego();
