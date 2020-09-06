@@ -34,23 +34,43 @@ new Vue({
             }
         },
         curar: function() {
-            this.jugador += this.randomInt(1,10);
+            var danioJugador=this.randomInt(1,10);
+            var curarJugador=this.randomInt(1,10)
+
+            this.jugador += curarJugador;
     
             if(this.jugador>100){
                 this.jugador=100
             }
+            this.jugador -= danioJugador
 
-            this.jugador -= this.randomInt(1,10);
-        },
-        rendirse: function() {
-            alert('Te rendiste')
-            this.finalizarJuego();
-                        
-        },
-        ataqueEspecial: function(){
-            this.jugador -= this.randomInt(10,20);
-            this.monstruo -= this.randomInt(10,20);
+            this.logs.unshift({
+                esJugador:false,
+                descripcion: "Monstruo ataca a Jugador con:"+danioJugador
+            });    
+            this.logs.unshift({
+                esJugador:true,
+                descripcion:"Jugador se cura con:"+curarJugador
+            });
             
+
+        },
+        ataqueEspecial : function(){
+            var especialJugador=this.randomInt(10,20);
+            var especialMonstruo=this.randomInt(10,20);
+
+            this.jugador -=especialJugador;
+            this.monstruo -=especialMonstruo; 
+
+            this.logs.unshift({
+                esJugador:false,
+                descripcion: "Monstruo usa ataque especial a Jugador con:"+especialJugador
+            });
+            this.logs.unshift({
+                esJugador:true,
+                descripcion:"Jugador usa ataque especial a Monstruo con:"+especialMonstruo
+            });
+
             if(this.jugador <= 0){
                 alert("Perdiste")
                 this.finalizarJuego();
@@ -59,7 +79,13 @@ new Vue({
             if(this.monstruo <= 0) {
                 alert('Ganaste')
                 this.finalizarJuego();
-            } 
+            }     
+
+        },
+        rendirse : function() {
+            alert('Te rendiste')
+            this.finalizarJuego();
+                        
         },
         iniciarJuego : function(){
             this.enJuego = true
